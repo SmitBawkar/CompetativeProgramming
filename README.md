@@ -1,1 +1,1 @@
-This is a repo for all Hacker rank's Cracking the coding interview problems# CompetativeProgramming
+In this repo inted to capture all the programming assignments/challenges that I solve.
