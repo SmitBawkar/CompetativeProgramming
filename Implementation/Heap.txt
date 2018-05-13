@@ -1,0 +1,124 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using static Solution;
+
+class Solution
+{
+    static List<int> arr = new List<int>();
+    static int size = 0;
+    public static void Main(String[] args)
+    {   add(6);
+        add(5);
+        add(9);
+        add(10);
+        add(2);
+
+        foreach (int i in arr)
+        {
+            Console.Write(i + "  ");
+        }
+      //  heapSort();
+        Console.Write("\n");
+        foreach (int i in arr)
+        {
+            Console.Write(i + "  ");
+        }
+        Console.Write("\n");
+        //Console.WriteLine(peek());
+        double a = 12, b = 7;
+        Console.WriteLine(2+".0");
+        Console.ReadLine();
+
+    }
+    public static void heapSort()
+    {
+        if (size > 1)
+        {
+            swap(0, size - 1);
+            size--;
+            heapifyDown();
+            heapSort();
+        }
+    }
+    public static int peek()
+    {
+        if (arr.Count < 0)
+            throw new Exception("Array is empty");
+        return arr[0];        
+    }
+    public static void add(int el)
+    {
+        size++;
+        arr.Add(el);
+        heapifyUp();
+    }
+    public static int remove()
+    {
+        if (size <= 0)
+            throw new Exception("Array is empty");
+        int el = arr[0];
+        arr[0] = arr[size - 1];
+        heapifyDown();
+        arr.RemoveAt(size - 1);
+        return el;
+
+    }
+
+    private static void heapifyUp()
+    {
+        int index = size-1;
+        while (hasParent(index) && arr[parentIndex(index)] > arr[index])
+        {
+            swap(parentIndex(index), index);
+            index = parentIndex(index);
+        }
+    }
+    private static void heapifyDown()
+    {
+        int index = 0;
+        while (hasLeftChild(index))
+        {
+            int smallestIndex = leftChildIndex(index);
+            if (hasrightChild(index) && arr[rightChildIndex(index)] < arr[leftChildIndex(index)])
+                smallestIndex = rightChildIndex(index);
+            swap(smallestIndex, index);
+            index = smallestIndex;
+        }
+    }
+    private static int leftChildIndex(int index)
+    {
+        return index * 2 + 1;
+    }
+    private static int rightChildIndex(int index)
+    {
+        return index * 2 + 2;
+    }
+    private static int parentIndex(int index)
+    {      
+            return (index - 1) / 2;
+    }
+    private static bool hasLeftChild(int index)
+    {
+        return (leftChildIndex(index) < size-1);
+    }
+    private static bool hasrightChild(int index)
+    {
+        return (rightChildIndex(index) < size-1);
+    }
+    private static bool hasParent(int index)
+    {
+        if (index == 0)
+            return false;
+        else
+            return (parentIndex(index) >= 0);
+    }
+    private static void swap(int index1, int index2)
+    {
+        int temp = arr[index1];
+        arr[index1] = arr[index2];
+        arr[index2] = temp;
+    }
+
+}
