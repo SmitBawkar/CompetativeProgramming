@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = new int[] { 2, 5, 1, 10, 3, 5, 4, 8, 7, 6, 9, 15, 29, 20, 16, 23, 24, 12, 60,50,50,50};
+            insertionSort(arr);
+            foreach (int el in arr)
+                Console.Write(el + " ");
+
+            Console.ReadKey();
+        }
+        static void insertionSort(int[] arr)
+        {
+            if (arr.Length == 1)
+                return;
+
+            for (int i = 1; i < arr.Length; i++)
+            {
+                int temp = arr[i];
+                int j;
+                bool shift = false;
+                for (j = 0; j < i; j++)
+                {
+                    if (arr[j] > arr[i])
+                    {
+                        shift = true;
+                        break;
+                    }
+                }
+
+                    if (shift)
+                    {
+                        for (int k = i - 1; k >= j; k--)
+                        {
+                            arr[k + 1] = arr[k];
+                        }
+                        arr[j] = temp;
+                    }
+            }
+        }
+    }
+}
